@@ -13,4 +13,5 @@ Graphics::~Graphics() {
 void Graphics::DrawWindow() {
     SDL_RenderClear(_renderer);
     SDL_RenderPresent(_renderer);
+    //TestChange
 }

@@ -10,7 +10,8 @@ private:
     SDL_Renderer* _renderer{};
     SDL_Window* _window{};
 public:
-    Graphics(int width, int height, int window_flags);
+    Graphics(const char* title, int width, int height, int window_flags);
+    void DrawWindow();
     ~Graphics();
 };
 

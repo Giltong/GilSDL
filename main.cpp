@@ -1,8 +1,7 @@
 #include <iostream>
+#include <engine.h>
 #include <SDL.h>
 int main(int argc, char* argv[]) {
-    SDL_Window* window;
-    SDL_Renderer* renderer;
-    SDL_CreateWindowAndRenderer(600,600,0, &window, &renderer);
+    Engine::init(800,600,0);
     return 0;
 }

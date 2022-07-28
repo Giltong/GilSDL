@@ -6,7 +6,7 @@
 
 class FunnyFace : public Object{
 public:
-    FunnyFace(int x, int y, std::string assetLocation);
+    FunnyFace(int x, int y, std::string path);
     void update(double dt) override;
 };
 

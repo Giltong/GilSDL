@@ -1,7 +1,6 @@
 #include "engine.h"
 #include "SDL.h"
 #include "graphics.h"
-#include <string>
 
 void Engine::init(const char* title, int width, int height, int window_flags, int fps) {
     if(SDL_Init(SDL_INIT_EVERYTHING) == 0)
@@ -20,20 +19,19 @@ void Engine::start() {
     double deltaTime = 0;
 
     while(!quit) {
-        _graphics->resetRenderer();
         LAST = NOW;
         NOW = SDL_GetPerformanceCounter();
-        deltaTime = ((NOW - LAST) * 1000 / (double) SDL_GetPerformanceFrequency());
+        deltaTime = ((NOW - LAST) / (double) SDL_GetPerformanceFrequency());
 
         if(pollEvents() == -1)
         {
-            break;
+            quit = true;
         }
 
         pollEvents();
         update(deltaTime);
         draw();
-        _graphics->Present();
+        _graphics->resetRenderer();
     }
 }
 
@@ -46,10 +44,18 @@ int Engine::pollEvents() {
             return -1;
         }
     }
+    return 0;
 }
 void Engine::draw()
 {
-
+    for (Object *object : objects) {
+        if(object->getVisibility())
+        {
+            SDL_Texture *tex = _graphics->getTexture(object->path);
+            _graphics->renderTexture(tex, object->x, object->y, object->w, object->h);
+        }
+    }
+    _graphics->Present();
 }
 
 void Engine::update(double dt)

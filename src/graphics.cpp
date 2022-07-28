@@ -23,6 +23,7 @@ SDL_Texture *Graphics::getTexture(const std::string &file) {
         //Texture hasn't been created for this asset, so create it.
         SDL_Texture *texture = nullptr;
         SDL_Surface *loadedImage = SDL_LoadBMP(file.c_str());
+
         texture = SDL_CreateTextureFromSurface(_renderer, loadedImage);
         SDL_FreeSurface(loadedImage);
         _textureAssets[file] = texture;

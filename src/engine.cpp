@@ -7,14 +7,13 @@ void Engine::init(const char* title, int width, int height, int window_flags, in
     if(SDL_Init(SDL_INIT_EVERYTHING) == 0)
     {
         _graphics = new Graphics(title, width, height, window_flags);
-        _fpsCap = fps;
     }
 
 }
 
-void Engine::mainloop() {
+void Engine::start() {
     bool quit = false;
-    SDL_Event event;
+
 
     Uint64 NOW = SDL_GetPerformanceCounter();
     Uint64 LAST = 0;
@@ -26,15 +25,42 @@ void Engine::mainloop() {
         NOW = SDL_GetPerformanceCounter();
         deltaTime = ((NOW - LAST) * 1000 / (double) SDL_GetPerformanceFrequency());
 
-        _graphics->renderTexture(_graphics->getTexture("../assets/sprites/testImage.bmp"), 0, 0, 10.0, 2.0);
-
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
-                quit = true;
-            }
+        if(pollEvents() == -1)
+        {
+            break;
         }
+
+        pollEvents();
+        update(deltaTime);
+        draw();
         _graphics->Present();
     }
+}
+
+int Engine::pollEvents() {
+    SDL_Event event;
+    while(SDL_PollEvent(&event))
+    {
+        if(event.type == SDL_QUIT)
+        {
+            return -1;
+        }
+    }
+}
+void Engine::draw()
+{
+
+}
+
+void Engine::update(double dt)
+{
+    for (Object *object : objects) {
+        object->update(dt);
+    }
+}
+
+void Engine::addObject(Object *object) {
+    objects.push_back(object);
 }
 
 

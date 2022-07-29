@@ -9,6 +9,7 @@ public:
     Object(int x = 0, int y = 0);
     virtual void update(double dt);
     bool getVisibility() const {return visibility;};
+public:
     double x;
     double y;
     double w = 1.0;

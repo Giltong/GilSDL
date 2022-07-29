@@ -9,7 +9,6 @@ class Engine {
 private:
     Graphics* _graphics{};
     std::vector<Object*> objects;
-    int pollEvents();
     void update(double dt);
     void draw();
 

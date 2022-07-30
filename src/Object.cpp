@@ -20,4 +20,8 @@ void Object::update(double dt) {
     return;
 }
 
+void Object::setInput(input& input) {
+    _in = &input;
+}
+
 

@@ -11,7 +11,7 @@ private:
     std::vector<Object*> objects;
     void update(double dt);
     void draw();
-
+    void initInput(input &in);
 public:
     void init(const char* title, int width, int height, int window_flags, int fps);
     void start();

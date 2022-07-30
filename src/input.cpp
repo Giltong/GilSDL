@@ -28,3 +28,7 @@ bool input::getKeyDown(const SDL_Scancode &sc) {
 bool input::getKeyUp(const SDL_Scancode &sc) {
     return _releasedKeys[sc];
 }
+
+void input::test() {
+    SDL_Log("input test");
+}

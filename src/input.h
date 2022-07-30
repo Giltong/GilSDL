@@ -8,6 +8,7 @@
 class input {
 public:
     void newFrame();
+    void test();
     void keyUpEvent(const SDL_Event& event);
     void keyDownEvent(const SDL_Event& event);
     bool getKey(const SDL_Scancode& sc);

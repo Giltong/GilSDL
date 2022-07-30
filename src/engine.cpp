@@ -13,11 +13,10 @@ void Engine::init(const char* title, int width, int height, int window_flags, in
 void Engine::start() {
     bool quit = false;
     input in;
-
+    initInput(in);
     Uint64 NOW = SDL_GetPerformanceCounter();
     Uint64 LAST = 0;
     double deltaTime = 0;
-
     while(!quit) {
         LAST = NOW;
         NOW = SDL_GetPerformanceCounter();
@@ -40,10 +39,6 @@ void Engine::start() {
             }
         }
 
-
-
-
-
         update(deltaTime);
         draw();
         _graphics->resetRenderer();
@@ -63,7 +58,6 @@ void Engine::draw()
 
 void Engine::update(double dt)
 {
-    SDL_Log("%f",1.0/dt);
     for (Object *object : objects) {
         object->update(dt);
     }
@@ -71,6 +65,15 @@ void Engine::update(double dt)
 
 void Engine::addObject(Object *object) {
     objects.push_back(object);
+}
+
+void Engine::initInput(input &in) {
+    for (Object *object : objects) {
+        if (object->getUsingInput())
+        {
+            object->setInput(in);
+        }
+    }
 }
 
 
